@@ -17,42 +17,41 @@ print(r'''
 ''',end="\n\n")
 
 
-def encode(msg, shift):
-    shift_text = ""
-    for letter in msg:
-        if letter in small_alpha:
-            shift_text+=chr((ord(letter)-97+shift)%26+97)
-        elif letter in big_alpha:
-            shift_text += chr((ord(letter) - 65 + shift) % 26 + 65)
-        else:
-            shift_text += letter
-    print("Your encoded message is : ",shift_text)
+def caesar_cipher():
+    while True:
+        choice = input("You want to decode or encode? : ")
+        msg = input("type the message : ")
+        shift = int(input("Enter the shift value :"))
+        shift_text = ""
+        if choice == "encode":
 
-def decode(msg,shift):
-    shift_text=""
-    for letter in msg:
-        if letter in small_alpha:
-            shift_text+=chr((ord(letter)-97-shift)%26+97)
-        elif letter in big_alpha:
-            shift_text += chr((ord(letter) - 65 - shift) % 26 + 65)
+            for letter in msg:
+                if letter in small_alpha:
+                    shift_text += chr((ord(letter) - 97 + shift) % 26 + 97)
+                elif letter in big_alpha:
+                    shift_text += chr((ord(letter) - 65 + shift) % 26 + 65)
+                else:
+                    shift_text += letter
+            print("Your encoded message is : ", shift_text)
+        elif choice == "decode":
+            shift_text = ""
+            for letter in msg:
+                if letter in small_alpha:
+                    shift_text += chr((ord(letter) - 97 - shift) % 26 + 97)
+                elif letter in big_alpha:
+                    shift_text += chr((ord(letter) - 65 - shift) % 26 + 65)
+                else:
+                    shift_text += letter
+            print("Your decoded message is :", shift_text)
         else:
-            shift_text+=letter
-    print("Your decoded message is :",shift_text)
-while True :
-    choice = input("You want to decode or encode? : ")
-    msg = input("type the message : ")
-    shift = int(input("Enter the shift value :"))
-    if choice=="encode":
-        encode(msg, shift)
-    elif choice=="decode":
-        decode(msg, shift)
-    else:
-        print("select valid option!")
-    again=input("want to continue 'y' or 'n' : ").lower()
-    if again=='y':
-        continue
-    elif again=='n':
-        print("Thanks for using!")
-        break
-    else:
-        print("choose valid option!")
+            print("select valid option!")
+        again = input("want to continue 'y' or 'n' : ").lower()
+        if again == 'y':
+            continue
+        elif again == 'n':
+            print("Thanks for using!")
+            break
+        else:
+            print("choose valid option!")
+            break
+caesar_cipher()
